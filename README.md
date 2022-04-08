@@ -1,1 +1,2 @@
-# ip_hc2
+# supply-chain-management
+CS2951O Project3 using CPLEX solver
