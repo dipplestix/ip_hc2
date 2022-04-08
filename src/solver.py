@@ -10,8 +10,7 @@ from datetime import datetime
 from config import Config
 import math
 import heapq as hq
-from numba import jit
-
+import pandas
 
 @dataclass
 class Solution:
@@ -21,7 +20,7 @@ class Solution:
 def check_integer(solution) -> bool:
     eps = 1e-5
     all_ints = True
-    for val in solution.get_all_values():
+    for val in solution.as_df()['value']:
         if abs(val - round(val)) > eps:
             all_ints = False
             break
@@ -119,11 +118,6 @@ class Solver:
             ns = self.model.solve()
             if self.counter == 1:
                 a = self.model.get_cplex()
-                print("CURRENT TABLEAU:")
-                print(len(a.solution.advanced.binvarow()[0]))
-                print(len(ns.get_all_values()))
-                print(len(a.solution.advanced.binvrow()))
-                print(len(a.solution.advanced.binvarow()))
 
                 # for row in a.solution.advanced.binvarow():
                 #     print(row)
